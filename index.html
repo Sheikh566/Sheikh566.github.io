@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nova+Flat&display=swap"
+      rel="stylesheet"
+    />
+    <title>Calculator by Abdullah</title>
+    <style>
+      input {
+        position: absolute;
+        top: 166px;
+        left: 58px;
+        text-align: right;
+        height: 120px;
+        width: 480px;
+        background-color: transparent;
+        border: none;
+        font-size: 100px;
+        color: rgb(0, 255, 157);
+      }
+
+      #image {
+        position: absolute;
+        z-index: -10;
+        top: 96px;
+        height: 770px;
+      }
+
+      img {
+        min-width: 590px;
+        max-height: 100%;
+      }
+
+      #toggle {
+        position: absolute;
+        top: 128px;
+        left: 75px;
+        width: 450px;
+        height: 37px;
+        display: none;
+        background-color: #43607c;
+      }
+
+      table {
+        margin-top: 305px;
+        margin-left: 30px;
+      }
+
+      button {
+        background-color: transparent;
+        border: none;
+        height: 118px;
+        width: 129px;
+        font-size: 30px;
+        font-family: "Nova Flat", cursive;
+        color: rgb(45, 77, 112);
+      }
+
+      button:focus {
+        outline: none;
+      }
+      button:active {
+        color: chartreuse;
+      }
+      #plus {
+        height: 230px;
+      }
+
+      .upper {
+        height: 35px;
+      }
+
+      #onoff {
+        font-size: 23px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="image"><img src="Calculator.png" alt="calculator" /></div>
+    <div id="toggle"></div>
+    <div class="calculator">
+      <input type="text" name="screen" id="screen" />
+      <table>
+        <tr>
+          <td></td>
+          <td><button id="onoff" class="upper">On/Off</button></td>
+          <td><button class="upper">C</button></td>
+          <td><button id="equal" class="upper">=</button></td>
+        </tr>
+        <tr>
+          <td><button>7</button></td>
+          <td><button>8</button></td>
+          <td><button>9</button></td>
+          <td><button>x</button></td>
+        </tr>
+        <tr>
+          <td><button>4</button></td>
+          <td><button>5</button></td>
+          <td><button>6</button></td>
+          <td><button>/</button></td>
+        </tr>
+        <tr>
+          <td><button>1</button></td>
+          <td><button>2</button></td>
+          <td><button>3</button></td>
+          <td rowspan="2"><button id="plus">+</button></td>
+        </tr>
+        <tr>
+          <td><button>0</button></td>
+          <td><button>.</button></td>
+          <td><button>-</button></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+  <script>
+    let screen = document.getElementById("screen");
+    buttons = document.querySelectorAll("button");
+    let screenValue = "";
+    var x = document.getElementById("toggle");
+    for (item of buttons) {
+      item.addEventListener("click", (e) => {
+        buttonText = e.target.innerText;
+        if (buttonText == "On/Off"){
+          if (x.style.display === "block") {
+            screenValue = "";
+            screen.value = screenValue;
+            x.style.display = "none";
+            document.getElementById("screen").style.opacity = "1";
+            
+          } else {
+            x.style.display = "block";
+            screenValue = "";
+            screen.value = screenValue;
+            document.getElementById("screen").style.opacity = "0";
+          }
+        }
+         else if (buttonText == "x") {
+          buttonText = "*";
+          screenValue += buttonText;
+          screen.value = screenValue;
+        } else if (buttonText == "C") {
+          screenValue = "";
+          screen.value = screenValue;
+        } else if (buttonText == "=") {
+          screen.value = eval(screenValue);
+        } else {
+          screenValue += buttonText;
+          screen.value = screenValue;
+        }
+      });
+    }
+  </script>
+</html>
