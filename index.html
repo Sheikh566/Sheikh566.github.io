@@ -11,7 +11,8 @@
     <title>Calculator by Abdullah</title>
     <style>
       body {
-        height: 100vh;
+        height: 200vh;
+        width: 200px;
         background-image: linear-gradient(
           to left top,
           #223724,
@@ -21,6 +22,7 @@
           #43ff00
         );
       }
+
       input {
         position: absolute;
         top: 166px;
@@ -74,9 +76,11 @@
       button:focus {
         outline: none;
       }
+
       button:active {
         color: chartreuse;
       }
+
       #plus {
         height: 230px;
       }
@@ -95,7 +99,11 @@
     <div id="image"><img src="Calculator.png" alt="calculator" /></div>
     <div id="toggle"></div>
     <div class="calculator">
-      <input type="text" name="screen" id="screen" />
+      <input
+        type="text"
+        name="screen"
+        id="screen"
+      />
       <table>
         <tr>
           <td></td>
@@ -130,36 +138,43 @@
     </div>
   </body>
   <script>
-    let screen = document.getElementById("screen");
+    var screen = document.getElementById("screen");
     buttons = document.querySelectorAll("button");
-    let screenValue = "";
+    var screenValue = "";
     var x = document.getElementById("toggle");
     for (item of buttons) {
-      item.addEventListener("click", (e) => {
+      item.addEventListener("click", function (e) {
         buttonText = e.target.innerText;
-        if (buttonText == "On/Off"){
+        if (buttonText == "On/Off") {
           if (x.style.display === "block") {
             screenValue = "";
             screen.value = screenValue;
             x.style.display = "none";
             document.getElementById("screen").style.opacity = "1";
-            
           } else {
             x.style.display = "block";
             screenValue = "";
             screen.value = screenValue;
             document.getElementById("screen").style.opacity = "0";
           }
-        }
-         else if (buttonText == "x") {
+        } else if (buttonText == "x") {
           buttonText = "*";
           screenValue += buttonText;
           screen.value = screenValue;
         } else if (buttonText == "C") {
           screenValue = "";
-          screen.value = screenValue;
-        } else if (buttonText == "=") {
-          screen.value = eval(screenValue);
+          screen.value = screenValue;}
+        else if (buttonText == "=") {
+          try {
+            if (eval(screenValue) === undefined) {
+              screen.value = "";
+            } else {
+              screen.value = eval(screenValue);
+            }
+          } catch (err) {
+            screen.value = "Syntax Error!";
+          }
+          screenValue = "";
         } else {
           screenValue += buttonText;
           screen.value = screenValue;
